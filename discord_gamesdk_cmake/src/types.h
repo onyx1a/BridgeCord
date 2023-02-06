@@ -5,6 +5,8 @@
 #ifdef _WIN32
 #include <Windows.h>
 #include <dxgi.h>
+#else
+#include <cstdint>
 #endif
 
 namespace discord {
