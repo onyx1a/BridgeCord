@@ -2,13 +2,21 @@
 #include <iostream>
 #include <thread>
 #include <chrono>
+#include <pybind11/pybind11.h>
+
+namespace py = pybind11;
 
 void Log(discord::LogLevel level, const char* message)
 {
     std::cout << "Log(" << (int)level << "): " << message << std::endl;
 }
 
-int main()
+void TestBridge()
+{
+    std::cout << "Make Bridge!" << std::endl;
+}
+
+void RunBridge()
 {
     std::cout << "Hello, Discord Game SDK" << std::endl;
     // auto p1 = std::chrono::system_clock::now();
@@ -66,9 +74,18 @@ int main()
     {
         auto result = core->RunCallbacks();
         std::this_thread::sleep_for(std::chrono::milliseconds(16));
+        if (PyErr_CheckSignals() != 0)
+        {
+            throw py::error_already_set();
+        }
         // result == discord::Result::Ok ? std::cout << "Activity RunCallback ok\n" : std::cout << "Activity RunCallback not ok\n";
     }
     
 
-    return 0;
+    // return 0;
+}
+
+PYBIND11_MODULE(DiscordBridge, m) {
+    m.def("TestBridge", &TestBridge);
+    m.def("RunBridge", &RunBridge);
 }
