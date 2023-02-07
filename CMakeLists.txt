@@ -6,7 +6,7 @@ find_package(pybind11 CONFIG REQUIRED)
 
 add_subdirectory(discord_gamesdk_cmake)
 
-pybind11_add_module(DiscordBridge src/main.cpp)
+pybind11_add_module(${CMAKE_PROJECT_NAME} src/main.cpp)
 
-target_link_libraries(DiscordBridge PUBLIC discord)
-set_target_properties(DiscordBridge PROPERTIES CXX_VISIBILITY_PRESET "hidden")
+target_link_libraries(${CMAKE_PROJECT_NAME} PUBLIC discord)
+set_target_properties(${CMAKE_PROJECT_NAME} PROPERTIES CXX_VISIBILITY_PRESET "hidden")
