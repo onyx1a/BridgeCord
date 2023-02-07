@@ -1,3 +1,0 @@
-import DiscordBridge
-
-DiscordBridge.RunBridge()

@@ -1,0 +1,3 @@
+import DiscordBridge
+
+DiscordBridge.TestBridge()
