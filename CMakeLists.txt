@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.24)
 project(DiscordBridge)
 
-find_package(Python 3.6 COMPONENTS Interpreter Development REQUIRED)
+find_package(Python 3.7 COMPONENTS Interpreter Development REQUIRED)
 find_package(pybind11 CONFIG REQUIRED)
 
 add_subdirectory(discord_gamesdk_cmake)
