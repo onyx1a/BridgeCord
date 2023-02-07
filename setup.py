@@ -126,11 +126,11 @@ class CMakeBuild(build_ext):
 
 setup(
     name="DiscordBridge",
-    version="0.0.1",
+    author="onyx1a",
+    author_email="onyx1anis@gmail.com",
+    version="0.0.2",
     long_description="",
     ext_modules=[CMakeExtension("DiscordBridge")],
     cmdclass={"build_ext": CMakeBuild},
-    zip_safe=False,
-    extras_require={"test": ["pytest>=6.0"]},
     python_requires=">=3.7",
 )
