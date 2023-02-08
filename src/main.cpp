@@ -90,9 +90,10 @@ PYBIND11_MODULE(DiscordBridge, m) {
 
     py::class_<Instance>(m, "Instance")
             .def(py::init<>())
-            .def("Init", &Instance::Init, py::arg("clientID"))
-            .def("SetDetails", &Instance::SetDetails)
-            .def("UpdateActivity", &Instance::UpdateActivity)
-            .def("RuntimeCallbacks", &Instance::RuntimeCallbacks)
+            .def("init", &Instance::Init, py::arg("clientID"))
+            .def("set_details", &Instance::SetDetails)
+            .def("set_state", &Instance::SetState)
+            .def("update_activity", &Instance::UpdateActivity)
+            .def("runtime_callbacks", &Instance::RuntimeCallbacks)
             ;
 }
