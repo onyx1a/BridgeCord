@@ -11,9 +11,9 @@ void Log(discord::LogLevel level, const char* message)
     std::cout << "Log(" << (int)level << "): " << message << std::endl;
 }
 
-void TestBridge()
+std::string TestBridge()
 {
-    std::cout << "Make Bridge!" << std::endl;
+    return "Make Bridge!";
 }
 
 void RunBridge()

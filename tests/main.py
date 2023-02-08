@@ -1,3 +1,4 @@
 import DiscordBridge
 
-DiscordBridge.TestBridge()
+def test_main():
+    assert DiscordBridge.TestBridge() == "Make Bridge!"
