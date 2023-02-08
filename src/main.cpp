@@ -19,23 +19,21 @@ std::string TestBridge()
 
 void RunBridge()
 {
-    std::cout << "Hello, Discord Game SDK" << std::endl;
-    // auto p1 = std::chrono::system_clock::now();
-    // auto timestamp = std::chrono::duration_cast<std::chrono::seconds>(p1.time_since_epoch()).count();
+//    std::cout << "Hello, Discord Game SDK" << std::endl;
     const discord::ClientId CLIENT_ID = 1071058178701283439;
 
     discord::Core* core{};
     discord::Result coreResult;
 
     coreResult = discord::Core::Create(CLIENT_ID, DiscordCreateFlags_Default, &core);
-    coreResult == discord::Result::Ok && core ? std::cout << "Core ok\n" : std::cout << "Core not ok\n";
-    
+    coreResult == discord::Result::Ok && core ? std::cout << "Core ok\n" : std::cout << "Core not ok, code: " << (int)coreResult << "\n";
+
     core->SetLogHook(discord::LogLevel::Debug, Log);
     core->SetLogHook(discord::LogLevel::Info, Log);
     core->SetLogHook(discord::LogLevel::Warn, Log);
     core->SetLogHook(discord::LogLevel::Error, Log);
 
-    // {   
+    // {
     //     auto result = core->ActivityManager().RegisterCommand("ProjectDream.exe");
     //     std::cout << "Register command status: " << (int)result << std::endl;
     // }
@@ -75,13 +73,13 @@ void RunBridge()
     {
         auto result = core->RunCallbacks();
         std::this_thread::sleep_for(std::chrono::milliseconds(16));
-        if (PyErr_CheckSignals() != 0)
-        {
-            throw py::error_already_set();
-        }
+//        if (PyErr_CheckSignals() != 0)
+//        {
+//            throw py::error_already_set();
+//        }
         // result == discord::Result::Ok ? std::cout << "Activity RunCallback ok\n" : std::cout << "Activity RunCallback not ok\n";
     }
-    
+
 
     // return 0;
 }
