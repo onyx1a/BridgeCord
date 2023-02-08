@@ -95,5 +95,16 @@ PYBIND11_MODULE(DiscordBridge, m) {
             .def("set_state", &Instance::SetState)
             .def("update_activity", &Instance::UpdateActivity)
             .def("runtime_callbacks", &Instance::RuntimeCallbacks)
+            .def("edit_current_activity", &Instance::EditCurrentActivity)
+            .def_readwrite("activityInfo", &Instance::activityInfo)
+            ;
+    py::class_<ActivityInfo>(m, "ActivityInfo")
+            .def(py::init())
+            .def_readwrite("details", &ActivityInfo::details)
+            .def_readwrite("state", &ActivityInfo::state)
+            .def_readwrite("smallText", &ActivityInfo::smallText)
+            .def_readwrite("smallImage", &ActivityInfo::smallImage)
+            .def_readwrite("largeText", &ActivityInfo::largeText)
+            .def_readwrite("largeImage", &ActivityInfo::largeImage)
             ;
 }

@@ -8,17 +8,13 @@ void Instance::Init(const long long int clientID)
     coreResult = discord::Core::Create(CLIENT_ID, DiscordCreateFlags_NoRequireDiscord, &this->core);
     coreResult == discord::Result::Ok && this->core ? std::cout << "Core ok\n" : std::cout << "Core not ok, code: "
                                                                                      << (int) coreResult << "\n";
-
-    activity.SetDetails("Details test");
-    activity.SetState("In game");
-    activity.GetAssets().SetLargeImage("dreampyavatar");
-    activity.SetType(discord::ActivityType::Playing);
 }
 
-void Instance::SetDetails(const std::string &details)
+void Instance::SetDetails(const std::string& details)
 {
-    this->activity.SetDetails(details.c_str());
-    this->UpdateActivity();
+    activityInfo.details = details;
+    activity.SetDetails(details.c_str());
+    UpdateActivity();
 }
 
 void Instance::UpdateActivity()
@@ -41,4 +37,22 @@ void Instance::RuntimeCallbacks()
     {
         this->core->RunCallbacks();
     }
+}
+
+void Instance::SetState(const std::string& state)
+{
+    activityInfo.state = state;
+    activity.SetState(state.c_str());
+    UpdateActivity();
+}
+
+void Instance::EditCurrentActivity()
+{
+    activity.SetDetails(activityInfo.details.c_str());
+    activity.SetState(activityInfo.state.c_str());
+    activity.GetAssets().SetSmallImage(activityInfo.smallImage.c_str());
+    activity.GetAssets().SetSmallText(activityInfo.smallText.c_str());
+    activity.GetAssets().SetLargeImage(activityInfo.largeImage.c_str());
+    activity.GetAssets().SetLargeText(activityInfo.largeText.c_str());
+    UpdateActivity();
 }
