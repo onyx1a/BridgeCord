@@ -2,6 +2,7 @@
 #include <iostream>
 #include <thread>
 #include <chrono>
+#include "Instance.hpp"
 #include <pybind11/pybind11.h>
 
 namespace py = pybind11;
@@ -88,4 +89,12 @@ void RunBridge()
 PYBIND11_MODULE(DiscordBridge, m) {
     m.def("TestBridge", &TestBridge);
     m.def("RunBridge", &RunBridge);
+
+    py::class_<Instance>(m, "Instance")
+            .def(py::init<>())
+            .def("Init", &Instance::Init, py::arg("clientID"))
+            .def("SetDetails", &Instance::SetDetails)
+            .def("UpdateActivity", &Instance::UpdateActivity)
+            .def("RuntimeCallbacks", &Instance::RuntimeCallbacks)
+            ;
 }
