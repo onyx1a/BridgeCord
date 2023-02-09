@@ -63,6 +63,17 @@ void Instance::EditCurrentActivity()
     activity.GetAssets().SetLargeText(activityInfo.largeText.c_str());
     UpdateActivity();
 }
+
+void Instance::SetTimestampsStart(long long int timestamps)
+{
+    activity.GetTimestamps().SetStart(timestamps);
+}
+
+void Instance::SetTimestampsEnd(long long int timestamps)
+{
+    activity.GetTimestamps().SetEnd(timestamps);
+}
+
 void Instance::DebugPrint(const std::string &message)
 {
     if (isDebugging)

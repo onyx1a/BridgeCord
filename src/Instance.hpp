@@ -26,6 +26,8 @@ public:
     void EditCurrentActivity();
     void UpdateActivity();
     void RunCallbacks();
+    void SetTimestampsStart(long long int);
+    void SetTimestampsEnd(long long int);
 
     ActivityInfo activityInfo;
     bool isDebugging;
