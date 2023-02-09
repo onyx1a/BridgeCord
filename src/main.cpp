@@ -9,8 +9,7 @@ std::string TestBridge()
     return "Make Bridge!";
 }
 
-
-PYBIND11_MODULE(DiscordBridge, m) {
+PYBIND11_MODULE(discordBridge, m) {
     m.def("TestBridge", &TestBridge);
 
     py::class_<Instance>(m, "Instance")

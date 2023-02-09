@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.24)
-project(DiscordBridge)
+project(discordBridge)
 
 find_package(Python 3.7 COMPONENTS Interpreter Development REQUIRED)
 find_package(pybind11 CONFIG REQUIRED)
