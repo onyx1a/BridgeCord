@@ -25,7 +25,7 @@ public:
     void SetState(const std::string&);
     void EditCurrentActivity();
     void UpdateActivity();
-    void RuntimeCallbacks();
+    void RunCallbacks();
 
     ActivityInfo activityInfo;
     bool isDebugging;

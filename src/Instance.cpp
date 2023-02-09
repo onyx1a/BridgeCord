@@ -38,11 +38,11 @@ void Instance::UpdateActivity()
     }
 }
 
-void Instance::RuntimeCallbacks()
+void Instance::RunCallbacks()
 {
-    if (this->core)
+    if (core)
     {
-        this->core->RunCallbacks();
+        core->RunCallbacks();
     }
 }
 

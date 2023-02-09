@@ -19,7 +19,7 @@ PYBIND11_MODULE(DiscordBridge, m) {
             .def("set_details", &Instance::SetDetails)
             .def("set_state", &Instance::SetState)
             .def("update_activity", &Instance::UpdateActivity)
-            .def("runtime_callbacks", &Instance::RuntimeCallbacks)
+            .def("run_callbacks", &Instance::RunCallbacks)
             .def("edit_current_activity", &Instance::EditCurrentActivity)
             .def_readwrite("activityInfo", &Instance::activityInfo)
             .def_readwrite("isDebugging", &Instance::isDebugging)
