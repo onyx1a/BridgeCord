@@ -1,13 +1,19 @@
 #include <iostream>
 #include "Instance.hpp"
 
+Instance::Instance(bool debugging)
+{
+    isDebugging = debugging;
+}
+
 void Instance::Init(const long long int clientID)
 {
     const discord::ClientId CLIENT_ID = clientID;
     discord::Result coreResult;
-    coreResult = discord::Core::Create(CLIENT_ID, DiscordCreateFlags_NoRequireDiscord, &this->core);
-    coreResult == discord::Result::Ok && this->core ? std::cout << "Core ok\n" : std::cout << "Core not ok, code: "
-                                                                                     << (int) coreResult << "\n";
+    coreResult = discord::Core::Create(CLIENT_ID, DiscordCreateFlags_NoRequireDiscord, &core);
+    std::string message = "Discord Core " + std::string(coreResult == discord::Result::Ok && core ? "ok " : "not ok ") +
+                          std::to_string((int) coreResult);
+    std::cout << message << std::endl;
 }
 
 void Instance::SetDetails(const std::string& details)
@@ -19,15 +25,16 @@ void Instance::SetDetails(const std::string& details)
 
 void Instance::UpdateActivity()
 {
-    if (this->core)
+    if (core)
     {
-        this->core->ActivityManager().UpdateActivity(activity, [](discord::Result result)
+        core->ActivityManager().UpdateActivity(activity, [this](discord::Result result)
         {
-            std::cout << "UpdateActivity status: " << (int) result << std::endl;
+            std::string message = "UpdateActivity status: " + std::to_string((int) result);
+            this->DebugPrint(message);
         });
     } else
     {
-        std::cout << "Discord is not running" << std::endl;
+        this->DebugPrint("Discord is not running");
     }
 }
 
@@ -55,4 +62,11 @@ void Instance::EditCurrentActivity()
     activity.GetAssets().SetLargeImage(activityInfo.largeImage.c_str());
     activity.GetAssets().SetLargeText(activityInfo.largeText.c_str());
     UpdateActivity();
+}
+void Instance::DebugPrint(const std::string &message)
+{
+    if (isDebugging)
+    {
+        std::cout << message << std::endl;
+    }
 }

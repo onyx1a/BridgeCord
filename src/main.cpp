@@ -89,7 +89,7 @@ PYBIND11_MODULE(DiscordBridge, m) {
     m.def("RunBridge", &RunBridge);
 
     py::class_<Instance>(m, "Instance")
-            .def(py::init<>())
+            .def(py::init<bool>(), py::arg("debugging") = true)
             .def("init", &Instance::Init, py::arg("clientID"))
             .def("set_details", &Instance::SetDetails)
             .def("set_state", &Instance::SetState)
@@ -97,6 +97,7 @@ PYBIND11_MODULE(DiscordBridge, m) {
             .def("runtime_callbacks", &Instance::RuntimeCallbacks)
             .def("edit_current_activity", &Instance::EditCurrentActivity)
             .def_readwrite("activityInfo", &Instance::activityInfo)
+            .def_readwrite("isDebugging", &Instance::isDebugging)
             ;
     py::class_<ActivityInfo>(m, "ActivityInfo")
             .def(py::init())
