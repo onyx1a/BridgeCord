@@ -28,6 +28,7 @@ public:
     void RunCallbacks();
     void SetTimestampsStart(long long int);
     void SetTimestampsEnd(long long int);
+    void InitForParty(int curSize, int maxSize, const char* id, const char* secret, bool isPrivate);
 
     ActivityInfo activityInfo;
     bool isDebugging;

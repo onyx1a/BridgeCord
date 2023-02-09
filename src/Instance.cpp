@@ -81,3 +81,18 @@ void Instance::DebugPrint(const std::string &message)
         std::cout << message << std::endl;
     }
 }
+
+void Instance::InitForParty(int curSize, int maxSize, const char* id, const char* secret, bool isPrivate)
+{
+    activity.GetParty().GetSize().SetCurrentSize(curSize);
+    activity.GetParty().GetSize().SetMaxSize(maxSize);
+    activity.GetParty().SetId(id);
+    activity.GetSecrets().SetJoin(secret);
+    if (isPrivate)
+    {
+        activity.GetParty().SetPrivacy(discord::ActivityPartyPrivacy::Private);
+    } else
+    {
+        activity.GetParty().SetPrivacy(discord::ActivityPartyPrivacy::Public);
+    }
+}
