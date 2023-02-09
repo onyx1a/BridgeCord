@@ -128,7 +128,7 @@ setup(
     name="discordBridge",
     author="onyx1a",
     author_email="onyx1anis@gmail.com",
-    version="0.0.5",
+    version="0.1.0",
     long_description="",
     ext_modules=[CMakeExtension("discordBridge")],
     cmdclass={"build_ext": CMakeBuild},
