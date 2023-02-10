@@ -38,6 +38,12 @@ PYBIND11_MODULE(discordBridge, m) {
             .def("edit_current_activity", &Instance::EditCurrentActivity)
             .def("set_timestamps_start", &Instance::SetTimestampsStart)
             .def("set_timestamps_end", &Instance::SetTimestampsEnd)
+            .def("init_for_party", &Instance::InitForParty,
+                 py::arg("cur_size"),
+                 py::arg("max_size"),
+                 py::arg("id"),
+                 py::arg("secret"),
+                 py::arg("is_private"))
             .def("current_user", &Instance::GetCurrentUser)
             .def_readwrite("activity_info", &Instance::activityInfo)
             .def_readwrite("is_debugging", &Instance::isDebugging)
