@@ -1,6 +1,6 @@
-#include "../discord_gamesdk_cmake/src/discord.h"
 #include "Instance.hpp"
 #include <pybind11/pybind11.h>
+#include <pybind11/functional.h>
 
 namespace py = pybind11;
 
