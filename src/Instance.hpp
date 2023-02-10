@@ -2,7 +2,7 @@
 #define DISCORDBRIDGE_INSTANCE_HPP
 
 #include <string>
-#include <thread>
+#include <sstream>
 #include "../discord_gamesdk_cmake/src/discord.h"
 
 class ActivityInfo
@@ -34,7 +34,8 @@ public:
     bool isDebugging;
 
 private:
-    void DebugPrint(const std::string&);
+    void DebugPrint(const std::string&) const;
+    void DebugPrint(const std::stringstream&) const;
 
     discord::Core* core{};
     discord::Activity activity{};

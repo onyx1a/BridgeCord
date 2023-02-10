@@ -11,9 +11,9 @@ void Instance::Init(const long long int clientID)
     const discord::ClientId CLIENT_ID = clientID;
     discord::Result coreResult;
     coreResult = discord::Core::Create(CLIENT_ID, DiscordCreateFlags_NoRequireDiscord, &core);
-    std::string message = "Discord Core " + std::string(coreResult == discord::Result::Ok && core ? "ok " : "not ok ") +
-                          std::to_string((int) coreResult);
-    std::cout << message << std::endl;
+    std::stringstream mes;
+    mes << "Discord Core " << (coreResult == discord::Result::Ok && core ? "ok " : "not ok ") << (int)coreResult;
+    std::cout << mes.str() << std::endl;
 }
 
 void Instance::SetDetails(const std::string& details)
@@ -29,7 +29,8 @@ void Instance::UpdateActivity()
     {
         core->ActivityManager().UpdateActivity(activity, [this](discord::Result result)
         {
-            std::string message = "UpdateActivity status: " + std::to_string((int) result);
+            std::stringstream message;
+            message << "UpdateActivity status: " << (int) result;
             this->DebugPrint(message);
         });
     } else
@@ -74,11 +75,19 @@ void Instance::SetTimestampsEnd(long long int timestamps)
     activity.GetTimestamps().SetEnd(timestamps);
 }
 
-void Instance::DebugPrint(const std::string &message)
+void Instance::DebugPrint(const std::string &message) const
 {
     if (isDebugging)
     {
         std::cout << message << std::endl;
+    }
+}
+
+void Instance::DebugPrint(const std::stringstream &message) const
+{
+    if (isDebugging)
+    {
+        std::cout << message.str() << std::endl;
     }
 }
 
