@@ -29,6 +29,7 @@ public:
     void SetTimestampsStart(long long int);
     void SetTimestampsEnd(long long int);
     void InitForParty(int curSize, int maxSize, const char* id, const char* secret, bool isPrivate);
+    discord::User GetCurrentUser();
 
     ActivityInfo activityInfo;
     bool isDebugging;
@@ -39,6 +40,7 @@ private:
 
     discord::Core* core{};
     discord::Activity activity{};
+    discord::User currentUser;
 };
 
 #endif //DISCORDBRIDGE_INSTANCE_HPP

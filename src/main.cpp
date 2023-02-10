@@ -12,6 +12,22 @@ std::string TestBridge()
 PYBIND11_MODULE(discordBridge, m) {
     m.def("TestBridge", &TestBridge);
 
+    py::class_<discord::User>(m, "DiscordUser")
+            .def_property_readonly("username", &discord::User::GetUsername)
+            .def_property_readonly("discriminator", &discord::User::GetDiscriminator)
+            .def_property_readonly("avatar_hash", &discord::User::GetAvatar)
+            .def_property_readonly("avatar_url", [](discord::User& user) -> py::str
+            {
+                std::stringstream url;
+                url << "https://cdn.discordapp.com/avatars/" << user.GetId() << "/" << user.GetAvatar() << ".png";
+                return url.str();
+            }, R"pbdoc(
+        Generate link to open avatar. See details:
+        https://discord.com/developers/docs/reference#image-formatting
+    )pbdoc")
+            .def_property_readonly("is_bot", &discord::User::GetBot)
+            .def_property_readonly("id", &discord::User::GetId)
+            ;
     py::class_<Instance>(m, "Instance")
             .def(py::init<bool>(), py::arg("debugging") = true)
             .def("init", &Instance::Init, py::arg("clientID"))
@@ -25,6 +41,7 @@ PYBIND11_MODULE(discordBridge, m) {
             .def("init_for_party", &Instance::InitForParty)
             .def_readwrite("activityInfo", &Instance::activityInfo)
             .def_readwrite("isDebugging", &Instance::isDebugging)
+            .def("current_user", &Instance::GetCurrentUser)
             ;
     py::class_<ActivityInfo>(m, "ActivityInfo")
             .def(py::init())

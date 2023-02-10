@@ -105,3 +105,9 @@ void Instance::InitForParty(int curSize, int maxSize, const char* id, const char
         activity.GetParty().SetPrivacy(discord::ActivityPartyPrivacy::Public);
     }
 }
+
+discord::User Instance::GetCurrentUser()
+{
+    core->UserManager().GetCurrentUser(&currentUser);
+    return currentUser;
+}
