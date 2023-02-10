@@ -111,3 +111,26 @@ discord::User Instance::GetCurrentUser()
     core->UserManager().GetCurrentUser(&currentUser);
     return currentUser;
 }
+
+int Instance::OnCurrentUserUpdateConnect(const std::function<void()>& callback)
+{
+    if (!core)
+    {
+        return -1;
+    }
+    OnCurrentUserUpdate = callback;
+    int token = core->UserManager().OnCurrentUserUpdate.Connect([this]()
+    {
+        OnCurrentUserUpdate();
+    });
+    return token;
+}
+
+void Instance::OnCurrentUserUpdateDisconnect(int token)
+{
+    if (!core)
+    {
+        return;
+    }
+    core->UserManager().OnCurrentUserUpdate.Disconnect(token);
+}

@@ -29,6 +29,9 @@ public:
     void SetTimestampsStart(long long int);
     void SetTimestampsEnd(long long int);
     void InitForParty(int curSize, int maxSize, const char* id, const char* secret, bool isPrivate);
+    void OnCurrentUserUpdateDisconnect(int token);
+
+    int OnCurrentUserUpdateConnect(const std::function<void()>& callback);
     discord::User GetCurrentUser();
 
     ActivityInfo activityInfo;
@@ -41,6 +44,7 @@ private:
     discord::Core* core{};
     discord::Activity activity{};
     discord::User currentUser;
+    std::function<void()> OnCurrentUserUpdate;
 };
 
 #endif //DISCORDBRIDGE_INSTANCE_HPP
