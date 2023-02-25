@@ -32,6 +32,8 @@ public:
     void OnCurrentUserUpdateDisconnect(int token);
     void SendRequestReply(discord::UserId userId, short reply);
     void SetSendRequestReplyCallback(std::function<void(int)>& callback);
+    void SendInvite(discord::UserId userId, const char* content);
+    void SetSendInviteCallback(std::function<void(int)>& callback);
 
     int OnCurrentUserUpdateConnect(const std::function<void()>& callback);
     int OnActivityJoinRequestConnect(const std::function<void(discord::User const&)>& callback);
@@ -50,6 +52,7 @@ private:
     std::function<void()> OnCurrentUserUpdate;
     std::function<void(discord::User const&)> OnActivityJoinRequest;
     std::function<void(int)> SendReplyCallback;
+    std::function<void(int)> SendInviteCallback;
 };
 
 #endif //DISCORDBRIDGE_INSTANCE_HPP

@@ -56,6 +56,8 @@ PYBIND11_MODULE(discordBridge, m) {
     )pbdoc")
             .def("send_request_reply", &Instance::SendRequestReply)
             .def("set_send_request_reply_callback", &Instance::SetSendRequestReplyCallback)
+            .def("send_invite", &Instance::SendInvite)
+            .def("set_send_invite_callback", &Instance::SetSendInviteCallback)
             .def_readwrite("activity_info", &Instance::activityInfo)
             .def_readwrite("is_debugging", &Instance::isDebugging)
             ;

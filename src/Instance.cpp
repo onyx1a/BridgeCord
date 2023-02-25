@@ -175,3 +175,24 @@ void Instance::SetSendRequestReplyCallback(std::function<void(int)> &callback)
 {
     SendReplyCallback = callback;
 }
+
+void Instance::SendInvite(discord::UserId userId, const char* content)
+{
+    if (!core)
+    {
+        return;
+    }
+
+    core->ActivityManager().SendInvite(userId, discord::ActivityActionType::Join, content, [this](discord::Result result)
+    {
+        if (SendInviteCallback)
+        {
+            SendReplyCallback((int)result);
+        }
+    });
+}
+
+void Instance::SetSendInviteCallback(std::function<void(int)> &callback)
+{
+    SendInviteCallback = callback;
+}
