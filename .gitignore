@@ -3,7 +3,7 @@ build
 .idea
 cmake-build-debug
 .venv
-DiscordBridge.egg-info
+discordBridge.egg-info
 dist
 __pycache__
 .pytest_cache
