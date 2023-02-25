@@ -30,6 +30,8 @@ public:
     void SetTimestampsEnd(long long int);
     void EditPartyInfo(int curSize, int maxSize, const char* id, const char* secret, bool isPrivate);
     void OnCurrentUserUpdateDisconnect(int token);
+    void SendRequestReply(discord::UserId userId, short reply);
+    void SetSendRequestReplyCallback(std::function<void(discord::Result)>& callback);
 
     int OnCurrentUserUpdateConnect(const std::function<void()>& callback);
     int OnActivityJoinRequestConnect(const std::function<void(discord::User const&)>& callback);
@@ -47,6 +49,7 @@ private:
     discord::User currentUser;
     std::function<void()> OnCurrentUserUpdate;
     std::function<void(discord::User const&)> OnActivityJoinRequest;
+    std::function<void(discord::Result)> SendReplyCallback;
 };
 
 #endif //DISCORDBRIDGE_INSTANCE_HPP

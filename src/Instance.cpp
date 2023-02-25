@@ -149,3 +149,29 @@ int Instance::OnActivityJoinRequestConnect(const std::function<void(const discor
     });
     return token;
 }
+
+void Instance::SendRequestReply(discord::UserId userId, short reply)
+{
+    if (!core)
+    {
+        return;
+    }
+    std::cout << "SendRequestReply" << std::endl;
+    core->ActivityManager().SendRequestReply(userId, (discord::ActivityJoinRequestReply)reply, [this](discord::Result result)
+    {
+        std::cout << "SendRequestReply cpp" << std::endl;
+        if (SendReplyCallback)
+        {
+            std::cout << "start python callback..." << std::endl;
+            SendReplyCallback(result);
+        } else
+        {
+            std::cout << "No one python callback(" << std::endl;
+        }
+    });
+}
+
+void Instance::SetSendRequestReplyCallback(std::function<void(discord::Result)> &callback)
+{
+    SendReplyCallback = callback;
+}
