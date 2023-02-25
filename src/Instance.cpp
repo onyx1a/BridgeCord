@@ -163,7 +163,7 @@ void Instance::SendRequestReply(discord::UserId userId, short reply)
         if (SendReplyCallback)
         {
             std::cout << "start python callback..." << std::endl;
-            SendReplyCallback(result);
+            SendReplyCallback((int)result);
         } else
         {
             std::cout << "No one python callback(" << std::endl;
@@ -171,7 +171,7 @@ void Instance::SendRequestReply(discord::UserId userId, short reply)
     });
 }
 
-void Instance::SetSendRequestReplyCallback(std::function<void(discord::Result)> &callback)
+void Instance::SetSendRequestReplyCallback(std::function<void(int)> &callback)
 {
     SendReplyCallback = callback;
 }
