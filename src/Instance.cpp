@@ -91,7 +91,7 @@ void Instance::DebugPrint(const std::stringstream &message) const
     }
 }
 
-void Instance::InitForParty(int curSize, int maxSize, const char* id, const char* secret, bool isPrivate)
+void Instance::EditPartyInfo(int curSize, int maxSize, const char* id, const char* secret, bool isPrivate)
 {
     activity.GetParty().GetSize().SetCurrentSize(curSize);
     activity.GetParty().GetSize().SetMaxSize(maxSize);

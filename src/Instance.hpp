@@ -28,7 +28,7 @@ public:
     void RunCallbacks();
     void SetTimestampsStart(long long int);
     void SetTimestampsEnd(long long int);
-    void InitForParty(int curSize, int maxSize, const char* id, const char* secret, bool isPrivate);
+    void EditPartyInfo(int curSize, int maxSize, const char* id, const char* secret, bool isPrivate);
     void OnCurrentUserUpdateDisconnect(int token);
 
     int OnCurrentUserUpdateConnect(const std::function<void()>& callback);

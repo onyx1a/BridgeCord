@@ -38,7 +38,7 @@ PYBIND11_MODULE(discordBridge, m) {
             .def("edit_current_activity", &Instance::EditCurrentActivity)
             .def("set_timestamps_start", &Instance::SetTimestampsStart)
             .def("set_timestamps_end", &Instance::SetTimestampsEnd)
-            .def("init_for_party", &Instance::InitForParty,
+            .def("edit_party_info", &Instance::EditPartyInfo,
                  py::arg("cur_size"),
                  py::arg("max_size"),
                  py::arg("id"),
