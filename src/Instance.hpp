@@ -32,7 +32,8 @@ public:
     void OnCurrentUserUpdateDisconnect(int token);
 
     int OnCurrentUserUpdateConnect(const std::function<void()>& callback);
-    discord::User GetCurrentUser();
+    int OnActivityJoinRequestConnect(const std::function<void(discord::User const&)>& callback);
+    std::pair<int, discord::User> GetCurrentUser();
 
     ActivityInfo activityInfo;
     bool isDebugging;

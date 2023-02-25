@@ -106,10 +106,10 @@ void Instance::EditPartyInfo(int curSize, int maxSize, const char* id, const cha
     }
 }
 
-discord::User Instance::GetCurrentUser()
+std::pair<int, discord::User> Instance::GetCurrentUser()
 {
-    core->UserManager().GetCurrentUser(&currentUser);
-    return currentUser;
+    auto result = core->UserManager().GetCurrentUser(&currentUser);
+    return std::pair<int, discord::User>{(int)result, currentUser};
 }
 
 int Instance::OnCurrentUserUpdateConnect(const std::function<void()>& callback)
