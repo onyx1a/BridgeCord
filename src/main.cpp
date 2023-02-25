@@ -58,9 +58,9 @@ PYBIND11_MODULE(discordBridge, m) {
             .def(py::init())
             .def_readwrite("details", &ActivityInfo::details)
             .def_readwrite("state", &ActivityInfo::state)
-            .def_readwrite("smallText", &ActivityInfo::smallText)
-            .def_readwrite("smallImage", &ActivityInfo::smallImage)
-            .def_readwrite("largeText", &ActivityInfo::largeText)
-            .def_readwrite("largeImage", &ActivityInfo::largeImage)
+            .def_readwrite("small_text", &ActivityInfo::smallText)
+            .def_readwrite("small_image", &ActivityInfo::smallImage)
+            .def_readwrite("large_text", &ActivityInfo::largeText)
+            .def_readwrite("large_image", &ActivityInfo::largeImage)
             ;
 }
