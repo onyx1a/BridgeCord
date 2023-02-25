@@ -102,7 +102,9 @@ class CMakeBuild(build_ext):
             archs = re.findall(r"-arch (\S+)", os.environ.get("ARCHFLAGS", ""))
             if archs:
                 cmake_args += ["-DCMAKE_OSX_ARCHITECTURES={}".format(";".join(archs))]
-
+        # self.library_dirs=['D:\\onyx1a\\Programming\\DiscordBridge\\build\\temp.win-amd64-cpython-311\\Release\\discordBridge\\discord_gamesdk_cmake\\Release\\', 
+        # 'D:\\onyx1a\\Programming\\DiscordBridge\\discord_gamesdk_cmake\\lib\\']
+        # self.libraries=['discord', 'discord_game_sdk']
         # Set CMAKE_BUILD_PARALLEL_LEVEL to control the parallel build level
         # across all generators.
         if "CMAKE_BUILD_PARALLEL_LEVEL" not in os.environ:
