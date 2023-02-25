@@ -45,6 +45,7 @@ private:
     discord::Activity activity{};
     discord::User currentUser;
     std::function<void()> OnCurrentUserUpdate;
+    std::function<void(discord::User const&)> OnActivityJoinRequest;
 };
 
 #endif //DISCORDBRIDGE_INSTANCE_HPP

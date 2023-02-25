@@ -134,3 +134,18 @@ void Instance::OnCurrentUserUpdateDisconnect(int token)
     }
     core->UserManager().OnCurrentUserUpdate.Disconnect(token);
 }
+
+int Instance::OnActivityJoinRequestConnect(const std::function<void(const discord::User &)> &callback)
+{
+    if (!core)
+    {
+        return -1;
+    }
+    OnActivityJoinRequest = callback;
+    
+    int token = core->ActivityManager().OnActivityJoinRequest.Connect([this](discord::User const& user)
+    {
+        OnActivityJoinRequest(user);
+    });
+    return token;
+}
