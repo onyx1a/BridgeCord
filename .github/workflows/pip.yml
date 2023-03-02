@@ -33,3 +33,17 @@ jobs:
 
     - name: Test
       run: pytest tests/main.py
+
+    - name: Fix ubuntu wheel
+      if: startsWith(matrix.os, 'ubuntu-22')
+      run: |
+        pip install auditwheel patchelf
+        auditwheel repair --plat manylinux_2_35_x86_64 dist/*.whl
+        rm -rf dist/*
+        mv -v wheelhouse/* dist/
+
+    - name: Publish to TestPyPi
+      uses: pypa/gh-action-pypi-publish@release/v1
+      with:
+        password: ${{ secrets.TEST_PYPI_API_TOKEN }}
+        repository_url: https://test.pypi.org/legacy/
