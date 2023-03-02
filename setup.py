@@ -130,9 +130,14 @@ setup(
     name="discordBridge",
     author="onyx1a",
     author_email="onyx1anis@gmail.com",
+    url="https://github.com/onyx1a/DiscordBridge",
     version="0.2.1",
-    long_description="",
+    long_description="Discord Game SDK implementation",
     ext_modules=[CMakeExtension("discordBridge")],
     cmdclass={"build_ext": CMakeBuild},
+    classifiers=[
+        "Programming Language :: C++",
+        "Development Status :: 3 - Alpha",
+    ],
     python_requires=">=3.7",
 )
