@@ -102,8 +102,6 @@ class CMakeBuild(build_ext):
             archs = re.findall(r"-arch (\S+)", os.environ.get("ARCHFLAGS", ""))
             if archs:
                 cmake_args += ["-DCMAKE_OSX_ARCHITECTURES={}".format(";".join(archs))]
-        # self.library_dirs=['D:\\onyx1a\\Programming\\DiscordBridge\\build\\temp.win-amd64-cpython-311\\Release\\discordBridge\\discord_gamesdk_cmake\\Release\\', 
-        # 'D:\\onyx1a\\Programming\\DiscordBridge\\discord_gamesdk_cmake\\lib\\']
         # self.libraries=['discord', 'discord_game_sdk']
         # Set CMAKE_BUILD_PARALLEL_LEVEL to control the parallel build level
         # across all generators.
@@ -127,13 +125,13 @@ class CMakeBuild(build_ext):
 
 
 setup(
-    name="discordBridge",
+    name="bridgecord",
     author="onyx1a",
     author_email="onyx1anis@gmail.com",
-    url="https://github.com/onyx1a/DiscordBridge",
-    version="0.2.1",
+    url="https://github.com/onyx1a/BridgeCord",
+    version="0.3",
     long_description="Discord Game SDK implementation",
-    ext_modules=[CMakeExtension("discordBridge")],
+    ext_modules=[CMakeExtension("bridgecord")],
     cmdclass={"build_ext": CMakeBuild},
     classifiers=[
         "Programming Language :: C++",

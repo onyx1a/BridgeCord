@@ -1,5 +1,5 @@
-#ifndef DISCORDBRIDGE_INSTANCE_HPP
-#define DISCORDBRIDGE_INSTANCE_HPP
+#ifndef BRIDGECORD_INSTANCE_HPP
+#define BRIDGECORD_INSTANCE_HPP
 
 #include <string>
 #include <sstream>
@@ -55,4 +55,4 @@ private:
     std::function<void(int)> SendInviteCallback;
 };
 
-#endif //DISCORDBRIDGE_INSTANCE_HPP
+#endif //BRIDGECORD_INSTANCE_HPP
