@@ -129,7 +129,7 @@ setup(
     author="onyx1a",
     author_email="onyx1anis@gmail.com",
     url="https://github.com/onyx1a/BridgeCord",
-    version="0.3.6",
+    version="0.3.7",
     long_description="Discord Game SDK implementation",
     ext_modules=[CMakeExtension("bridgecord")],
     cmdclass={"build_ext": CMakeBuild},
