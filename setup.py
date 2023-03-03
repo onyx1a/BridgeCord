@@ -123,8 +123,8 @@ class CMakeBuild(build_ext):
             ["cmake", "--build", "."] + build_args, cwd=build_temp, check=True
         )
 
-
-readme = ("README.md").read_text()
+this_dir = Path(__file__).parent
+readme = (this_dir / "README.md").read_text()
 
 setup(
     name="bridgecord",
