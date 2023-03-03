@@ -2,6 +2,7 @@ import os
 import re
 import subprocess
 import sys
+import shutil
 from pathlib import Path
 
 from setuptools import Extension, setup
@@ -102,7 +103,6 @@ class CMakeBuild(build_ext):
             archs = re.findall(r"-arch (\S+)", os.environ.get("ARCHFLAGS", ""))
             if archs:
                 cmake_args += ["-DCMAKE_OSX_ARCHITECTURES={}".format(";".join(archs))]
-        # self.libraries=['discord', 'discord_game_sdk']
         # Set CMAKE_BUILD_PARALLEL_LEVEL to control the parallel build level
         # across all generators.
         if "CMAKE_BUILD_PARALLEL_LEVEL" not in os.environ:
@@ -123,6 +123,20 @@ class CMakeBuild(build_ext):
             ["cmake", "--build", "."] + build_args, cwd=build_temp, check=True
         )
 
+        if sys.platform.startswith("win"):
+            cur_dir = os.getcwd()
+            build_dirs = os.listdir(f"{cur_dir}/build")
+            f_dll_path = [i for i in build_dirs if i.startswith("lib")][0]
+            s_dll_path = [i for i in build_dirs if i.startswith("temp")][0]
+
+            first_lib_path = f"{cur_dir}/discord_gamesdk_cmake/lib/discord_game_sdk.dll"
+
+            second_lib_path = f"{cur_dir}/build/{s_dll_path}/Release/bridgecord/discord_gamesdk_cmake/Release/discord.dll"
+
+            shutil.copy(first_lib_path, f"{cur_dir}/build/{f_dll_path}/")
+            shutil.copy(second_lib_path, f"{cur_dir}/build/{f_dll_path}/")
+
+
 this_dir = Path(__file__).parent
 readme = (this_dir / "README.md").read_text()
 
@@ -131,7 +145,7 @@ setup(
     author="onyx1a",
     author_email="onyx1anis@gmail.com",
     url="https://github.com/onyx1a/BridgeCord",
-    version="0.3.11",
+    version="0.3.12",
     description="Discord Game SDK implementation",
     ext_modules=[CMakeExtension("bridgecord")],
     cmdclass={"build_ext": CMakeBuild},
