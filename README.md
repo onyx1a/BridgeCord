@@ -7,7 +7,8 @@
 ```
 pip install bridgecord
 ```
-Simple example:
+---
+### Example
 ```python
 import bridgecord as bc
 
@@ -25,7 +26,8 @@ while True:
 
 `bridge.run_callbacks()` should be [always](https://discord.com/developers/docs/game-sdk/discord#runcallbacks) running.
 
-### Activity:
+---
+### Activity
 ```python
 # Set text, which display on user hovers over large image
 bridge.activity_info.large_text = "Large text"
@@ -38,6 +40,7 @@ If you editing any activity info (except timestamps), you should update activity
 ```python
 bridge.edit_current_activity()
 ```
+---
 ### Party info:
 ```python
 bridge.edit_party_info(cur_size=1, max_size=4, id="test", secret="secret", is_private=True)
@@ -48,6 +51,7 @@ This feature allows other users to see the button "Ask to Join", when clicked, w
 
 [![](https://i.imgur.com/saoZdEY.png)]()
 
+---
 ### Update user profile
 You can detect if user change avatar or discord name:
 ```python
