@@ -57,7 +57,7 @@ def test_callback() -> None:
         print(user.username)
         print(user.discriminator)
         print(user.avatar_hash)
-        print(user.avatar_url)
+        print(user.get_avatar_url("jpg"))
         print(user.is_bot)
         print(user.id)
 
@@ -69,7 +69,8 @@ Output result:
 onyx1a
 3440
 c240d87788e9e93464872ac80f047568
-https://cdn.discordapp.com/avatars/1052579421875339284/c240d87788e9e93464872ac80f047568.png
+https://cdn.discordapp.com/avatars/1052579421875339284/c240d87788e9e93464872ac80f047568.jpg
 False
 1052579421875339284
 ```
+Read more about user avatar [here](https://discord.com/developers/docs/reference#image-formatting-image-base-url).
