@@ -48,6 +48,7 @@ jobs:
         mv -v wheelhouse/* dist/
 
     - name: Publish to TestPyPi
+      if: ${{ startsWith(github.ref, 'refs/heads/dev') }}
       run: |
         twine upload --repository testpypi dist/* -u __token__ -p ${{ secrets.TEST_PYPI_API_TOKEN }}
 
