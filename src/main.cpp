@@ -16,10 +16,10 @@ PYBIND11_MODULE(bridgecord, m) {
             .def_property_readonly("username", &discord::User::GetUsername)
             .def_property_readonly("discriminator", &discord::User::GetDiscriminator)
             .def_property_readonly("avatar_hash", &discord::User::GetAvatar)
-            .def_property_readonly("avatar_url", [](discord::User& user) -> py::str
+            .def("get_avatar_url", [](discord::User& user, const std::string& format) -> py::str
             {
                 std::stringstream url;
-                url << "https://cdn.discordapp.com/avatars/" << user.GetId() << "/" << user.GetAvatar() << ".png";
+                url << "https://cdn.discordapp.com/avatars/" << user.GetId() << "/" << user.GetAvatar() << "." << format;
                 return url.str();
             }, R"pbdoc(
         Generate link to open avatar. See details:
