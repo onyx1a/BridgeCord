@@ -124,15 +124,20 @@ class CMakeBuild(build_ext):
         )
 
 
+readme = ("README.md").read_text()
+
 setup(
     name="bridgecord",
     author="onyx1a",
     author_email="onyx1anis@gmail.com",
     url="https://github.com/onyx1a/BridgeCord",
-    version="0.3.9",
-    long_description="Discord Game SDK implementation",
+    version="0.3.10",
+    description="Discord Game SDK implementation",
     ext_modules=[CMakeExtension("bridgecord")],
     cmdclass={"build_ext": CMakeBuild},
+    license='MIT',
+    long_description=readme,
+    long_description_content_type='text/markdown',
     classifiers=[
         "Programming Language :: C++",
         "Development Status :: 3 - Alpha",
