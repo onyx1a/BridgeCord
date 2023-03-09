@@ -7,12 +7,15 @@
 ```
 pip install bridgecord
 ```
+Check [SDK Starter Guide](https://discord.com/developers/docs/game-sdk/sdk-starter-guide) to understand how it works.
+
 ---
 ### Example
 ```python
 import bridgecord as bc
 
-bridge = bc.Instance()
+
+bridge = bc.Instance(debugging=False)
 bridge.init(clientID=CLIENT_ID)
 bridge.activity_info.details = "Hello, Python"
 bridge.activity_info.state = "In game"
@@ -27,6 +30,8 @@ while True:
 
 `bridge.run_callbacks()` should be [always](https://discord.com/developers/docs/game-sdk/discord#runcallbacks) running.
 
+If you set `debugging=False`, you will not receive some messages in the console. For example, by calling a method that triggers `UpdateActivity`, you will receive a message containing the [result code](https://discord.com/developers/docs/game-sdk/discord#data-models-result-enum). You can toggle this option by `bridge.is_debugging = True`. Note that this option is enabled by default. 
+
 ---
 ### Activity
 ```python
@@ -39,18 +44,13 @@ bridge.activity_info.small_text = "Small text"
 ```
 If you editing any activity info (except timestamps), you should update activity:
 ```python
-bridge.edit_current_activity()
+bridge.update_current_activity()
 ```
----
-### Party info:
+You can also set how much time is left:
 ```python
-bridge.edit_party_info(cur_size=1, max_size=4, id="test", secret="secret", is_private=True)
+bridge.set_timestamps_end(1678357800)
 ```
-[![](https://i.imgur.com/iKN7uhV.png)]()
-
-This feature allows other users to see the button "Ask to Join", when clicked, will send the user an invitation:
-
-[![](https://i.imgur.com/saoZdEY.png)]()
+[![](https://i.imgur.com/rppybww.png)]()
 
 ---
 ### Update user profile
@@ -66,7 +66,7 @@ def test_callback() -> None:
         print(user.is_bot)
         print(user.id)
 
-bridge.on_current_user_update_connect = test_callback
+bridge.on_current_user_update_connect(test_callback)
 ```
 In this example, `current_user()`returned [result code](https://discord.com/developers/docs/game-sdk/discord#data-models-result-enum) and user object.
 Output result:
@@ -79,3 +79,26 @@ False
 1052579421875339284
 ```
 Read more about user avatar [here](https://discord.com/developers/docs/reference#image-formatting-image-base-url).
+
+---
+### Callbacks
+You can set many callbacks for one action:
+```python
+token1 = bridge.on_current_user_update_connect(test_callback1)
+token2 = bridge.on_current_user_update_connect(test_callback2)
+```
+Tokens are needed in order to disable unnecessary callback:
+```python
+bridge.on_current_user_update_disconnect(token1)
+```
+
+---
+### Party info:
+```python
+bridge.edit_party_info(cur_size=1, max_size=4, id="test", secret="secret", is_private=True)
+```
+[![](https://i.imgur.com/iKN7uhV.png)]()
+
+This feature allows other users to see the button "Ask to Join", when clicked, will send the user an invitation:
+
+[![](https://i.imgur.com/saoZdEY.png)]()
