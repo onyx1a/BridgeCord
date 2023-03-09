@@ -54,7 +54,7 @@ void Instance::SetState(const std::string& state)
     UpdateActivity();
 }
 
-void Instance::EditCurrentActivity()
+void Instance::UpdateCurrentActivity()
 {
     activity.SetDetails(activityInfo.details.c_str());
     activity.SetState(activityInfo.state.c_str());

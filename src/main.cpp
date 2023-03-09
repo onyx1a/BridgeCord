@@ -35,7 +35,7 @@ PYBIND11_MODULE(bridgecord, m) {
             .def("set_state", &Instance::SetState)
             .def("update_activity", &Instance::UpdateActivity)
             .def("run_callbacks", &Instance::RunCallbacks)
-            .def("edit_current_activity", &Instance::EditCurrentActivity)
+            .def("update_current_activity", &Instance::UpdateCurrentActivity)
             .def("set_timestamps_start", &Instance::SetTimestampsStart)
             .def("set_timestamps_end", &Instance::SetTimestampsEnd)
             .def("edit_party_info", &Instance::EditPartyInfo,

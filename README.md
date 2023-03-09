@@ -18,7 +18,8 @@ bridge.activity_info.details = "Hello, Python"
 bridge.activity_info.state = "In game"
 bridge.activity_info.large_image = "dreampyavatar"
 bridge.set_timestamps_start(int(time.time()))
-bridge.edit_current_activity()
+bridge.update_current_activity()
+
 while True:
     bridge.run_callbacks()
 ```
