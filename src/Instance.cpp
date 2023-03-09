@@ -118,12 +118,8 @@ int Instance::OnCurrentUserUpdateConnect(const std::function<void()>& callback)
     {
         return -1;
     }
-    OnCurrentUserUpdate = callback;
-    int token = core->UserManager().OnCurrentUserUpdate.Connect([this]()
-    {
-        OnCurrentUserUpdate();
-    });
-    return token;
+
+    return core->UserManager().OnCurrentUserUpdate.Connect(callback);
 }
 
 void Instance::OnCurrentUserUpdateDisconnect(int token)
@@ -141,13 +137,8 @@ int Instance::OnActivityJoinRequestConnect(const std::function<void(const discor
     {
         return -1;
     }
-    OnActivityJoinRequest = callback;
-    
-    int token = core->ActivityManager().OnActivityJoinRequest.Connect([this](discord::User const& user)
-    {
-        OnActivityJoinRequest(user);
-    });
-    return token;
+
+    return core->ActivityManager().OnActivityJoinRequest.Connect(callback);
 }
 
 void Instance::SendRequestReply(discord::UserId userId, short reply)
@@ -157,18 +148,16 @@ void Instance::SendRequestReply(discord::UserId userId, short reply)
         return;
     }
     std::cout << "SendRequestReply" << std::endl;
-    core->ActivityManager().SendRequestReply(userId, (discord::ActivityJoinRequestReply)reply, [this](discord::Result result)
+    if (SendReplyCallback)
     {
-        std::cout << "SendRequestReply cpp" << std::endl;
-        if (SendReplyCallback)
+        core->ActivityManager().SendRequestReply(userId, (discord::ActivityJoinRequestReply)reply,[this](discord::Result result)
         {
-            std::cout << "start python callback..." << std::endl;
-            SendReplyCallback((int)result);
-        } else
-        {
-            std::cout << "No one python callback(" << std::endl;
-        }
-    });
+            SendReplyCallback((int) result);
+        });
+    } else
+    {
+        DebugPrint("No one SendRequestReply callback. See `set_send_request_reply_callback` method");
+    }
 }
 
 void Instance::SetSendRequestReplyCallback(std::function<void(int)> &callback)
@@ -183,13 +172,16 @@ void Instance::SendInvite(discord::UserId userId, const char* content)
         return;
     }
 
-    core->ActivityManager().SendInvite(userId, discord::ActivityActionType::Join, content, [this](discord::Result result)
+    if (SendInviteCallback)
     {
-        if (SendInviteCallback)
+        core->ActivityManager().SendInvite(userId, discord::ActivityActionType::Join, content, [this](discord::Result result)
         {
             SendReplyCallback((int)result);
-        }
-    });
+        });
+    } else
+    {
+        DebugPrint("No one SendRequestReply callback. See `set_send_invite_callback` method");
+    }
 }
 
 void Instance::SetSendInviteCallback(std::function<void(int)> &callback)

@@ -23,7 +23,7 @@ public:
     void Init(long long int clientID);
     void SetDetails(const std::string&);
     void SetState(const std::string&);
-    void EditCurrentActivity();
+    void UpdateCurrentActivity();
     void UpdateActivity();
     void RunCallbacks();
     void SetTimestampsStart(long long int);
@@ -49,8 +49,6 @@ private:
     discord::Core* core{};
     discord::Activity activity{};
     discord::User currentUser;
-    std::function<void()> OnCurrentUserUpdate;
-    std::function<void(discord::User const&)> OnActivityJoinRequest;
     std::function<void(int)> SendReplyCallback;
     std::function<void(int)> SendInviteCallback;
 };
